@@ -14,6 +14,14 @@ const getState = ({ getStore, setStore }) => {
 				const store = getStore();
 				const returnArr = store.allContacts.filter((contact, index) => indexToDelete !== index);
 				setStore({ allContacts: returnArr });
+			},
+			editContact: (name, phone, address, email, indexToDelete) => {
+				const store = getStore();
+				const modContact = { name, phone, address, email }; //destructuring
+				const updatedContact = store.allContacts.map((contact, index) =>
+					index === indexToDelete ? modContact : contact
+				);
+				setStore({ allContacts: updatedContact });
 			}
 		}
 	};
